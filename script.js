@@ -1,5 +1,8 @@
+const API_KEY = "1362c34423375d167d694489b1c74080"; // Consider storing this more securely
+
 const fetchWeather = async (city) => {
-    const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1362c34423375d167d694489b1c74080&units=metric`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`; // HTTPS URL
+
 
     try {
         const response = await fetch(url);
@@ -36,7 +39,6 @@ const fetchWeather = async (city) => {
     }
 };
 
-
 document.getElementById('searchForm').addEventListener('submit', function (event) {
     event.preventDefault(); // Prevent form from submitting and refreshing the page
     const city = document.getElementById('cityInput').value;
@@ -44,21 +46,22 @@ document.getElementById('searchForm').addEventListener('submit', function (event
 });
 
 
-
 const cities = ["shanghai", "boston", "lucknow", "new york", "chennai", "tamil nadu"];
+
 const populateTable = async () => {
   const tableBody = document.getElementById('weatherTableBody');
+    tableBody.innerHTML =""; //Clear the table before populating for better UX
 
     for( const city of cities){
         try{
-            const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1362c34423375d167d694489b1c74080&units=metric`;
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`; // HTTPS URL
             const response = await fetch(url);
                 if(!response.ok){
                    throw new Error(`Failed to fetch weather data for ${city}`);
                 }
 
               const result = await response.json();
-               const sunriseTime = new Date(result.sys.sunrise * 1000).toLocaleTimeString();
+              const sunriseTime = new Date(result.sys.sunrise * 1000).toLocaleTimeString();
                 const sunsetTime = new Date(result.sys.sunset * 1000).toLocaleTimeString();
 
 
@@ -88,5 +91,4 @@ const populateTable = async () => {
     }
 
 };
-
 populateTable();
