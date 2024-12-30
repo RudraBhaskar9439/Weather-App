@@ -1,8 +1,7 @@
-const API_KEY = "1362c34423375d167d694489b1c74080"; // Consider storing this more securely
+import { API_KEY } from './key.js';
 
 const fetchWeather = async (city) => {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`; // HTTPS URL
-
 
     try {
         const response = await fetch(url);
