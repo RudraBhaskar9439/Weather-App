@@ -1,0 +1,11 @@
+
+Command: shopt -s histappend
+Output:
+
+Exit Code: 0
+----
+Command: pwd
+Output:
+/Users/rudrabhaskar/Desktop/Github/Weather-App
+Exit Code: 0
+----
